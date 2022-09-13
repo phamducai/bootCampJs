@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .tab {
+        display: none;
+      }
+      .show {
+        display: block;
+      }
+      .active {
+        background-color: green;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <button
+        class="active"
+        onclick="changeTab(event)"
+        id="btnAction"
+        data-tab="tabAction"
+      >
+        Action Film
+      </button>
+      <button onclick="changeTab(event)" id="btnFiction" data-tab="tabFiction">
+        Fiction Movie
+      </button>
+      <button
+        onclick="changeTab(event)"
+        id="btnRomantic"
+        data-tab="tabRomantic"
+      >
+        Romantic Movie
+      </button>
+      <button onclick="changeTab(event)" id="btnHorror" data-tab="tabHorror">
+        Horror Movie
+      </button>
+    </div>
+    <div>
+      <div class="tab show" id="tabAction">
+        <h1>Fast And Furious</h1>
+        <h1>Fast And Furious</h1>
+      </div>
+      <div class="tab" id="tabFiction">
+        <h1>The Avenger</h1>
+        <h1>Harry Porter</h1>
+      </div>
+      <div class="tab" id="tabRomantic">
+        <h1>Crash landing on you</h1>
+        <h1>Our beloved summer</h1>
+      </div>
+      <div class="tab" id="tabHorror">
+        <h1>Insidious</h1>
+        <h1>Conjuring</h1>
+      </div>
+    </div>
+    <script src="./task.js"></script>
+  </body>
+</html>

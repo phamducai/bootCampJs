@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <style>
+      .tinhtien {
+        display: none;
+      }
+    </style>
+
+    <form action="">
+      <h2 style="text-align: center">tinh tien</h2>
+      <label for="totalMoney">Tong tien la bao nhieu</label>
+      <span>$</span
+      ><input type="text" placeholder="Tong Tien" id="totalMoney" />
+      <br />
+      <label for="selection">Chon de Tip</label>
+      <br />
+      <select name="" id="selection">
+        <option value="">--Chon tien tip--</option>
+        <option value="5">5%</option>
+        <option value="10">10%</option>
+        <option value="15">15%</option>
+        <option value="20">20%-</option>
+        <option value="30">30%-tuyệt</option>
+      </select>
+      <br />
+      <label for="people">muon share bao nhieu nguoi</label>
+      <br />
+      <input type="text" placeholder="nhap so nguoi" id="people" />
+      <span>nguoi</span>
+      <br />
+      <button type="button" onclick="payMent()">Tinh nao</button>
+      <div class="tinhtien" id="tinhtienchoabe">
+        Tip Amout
+        <p>$ <span id="xuatTien"></span></p>
+        moi nguoi
+      </div>
+    </form>
+    <script src="./payment.js"></script>
+  </body>
+</html>

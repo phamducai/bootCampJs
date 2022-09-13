@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="">
+      <h1>Tính tiền cáp</h1>
+      <label for="customerID">Mã Khách Hàng :</label>
+      <input type="text" name="makhachhang" id="customerID" />
+
+      <ul>
+        <li>
+          <input
+            type="radio"
+            name="selector"
+            id="personalCustomer"
+            value="Cá Nhân"
+            onclick="check()"
+          />
+          <label for="personalCustomer">Cá Nhân</label>
+        </li>
+        <li>
+          <input
+            type="radio"
+            name="selector"
+            id="bussinesCustomer"
+            value="Doanh Nghiệp"
+            onclick="check()"
+          />
+          <label for="bussinesCustomer">Doanh Nghiệp</label>
+        </li>
+      </ul>
+
+      <label for="numberConnection">Số kết nối</label>
+      <input type="text" name="soketnoi" id="numberConnection" />
+
+      <label for="numberChannel">Số kênh cao cấp</label>
+      <input type="text" name="sokenh" id="numberChannel" />
+    </form>
+
+    <button onclick="charge()" id="calcMoney">Tính tiền</button>
+
+    <div id="thanhtien">
+      <h1>
+        <span id="xuatTien" class="xuatTien"></span>
+      </h1>
+    </div>
+
+    <script src="index.js"></script>
+  </body>
+</html>

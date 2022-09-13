@@ -1,0 +1,4 @@
+// hoisting khac nhau ve hosting :cho phep dung 1 bien hoac function khi khoi tao
+// callbackfunction:functionn B duoc truyen vao fuction A duoi dang tham so ban dau
+// closure:function A return function B
+// curry function tach cac argument thanh nhieu function con
