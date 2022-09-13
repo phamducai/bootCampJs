@@ -1,14 +1,19 @@
-function ex4() {
-  var n = 467;
-  if (n === 2) {
-    console.log(n, "la so nguyen to");
-  } else {
-    for (var i = 2; i < Math.sqrt(n); i++) {
-      if (n % i === 0) {
-        console.log(n, "ko la so nguyen to");
-        return;
+function ex1() {
+  var n = document.getElementById("number").value;
+
+  var arr = [];
+  for (var i = 2; i <= n; i++) {
+    var isPrime = true;
+    for (var k = 2; k <= Math.sqrt(i); k++) {
+      if (i % k === 0) {
+        isPrime = false;
+        break;
       }
     }
-    console.log(n, " la so nguyen to");
+    if (isPrime) {
+      arr.push(i);
+      document.getElementById("result").innerHTML = arr;
+      console.log(arr);
+    }
   }
 }
