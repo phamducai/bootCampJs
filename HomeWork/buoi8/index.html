@@ -16,13 +16,13 @@
   <body>
     <div class="card m-auto py-5" style="width: 30rem">
       <form action="" class="container m-auto">
-        <div class="row">
+        <div class="row my-2">
           <div class="col-6">
             <input
               type="number"
-              class="me-auto"
+              class="me-auto pb-2"
               id="inputNumber"
-              placeholder="nhập số n"
+              placeholder="nhập số"
             />
           </div>
           <div class="col-6">
@@ -55,7 +55,7 @@
               data-bs-parent="#accordionExample"
             >
               <div class="accordion-body">
-                <button class="btn btn-primary" onclick="sum()">
+                <button class="btn btn-primary my-2" onclick="sum()">
                   Tính Tổng
                 </button>
                 <div class="alert alert-primary" role="alert">
@@ -82,7 +82,10 @@
               data-bs-parent="#accordionExample"
             >
               <div class="accordion-body">
-                <button class="btn btn-primary" onclick="countPostiveNumber()">
+                <button
+                  class="btn btn-primary my-2"
+                  onclick="countPostiveNumber()"
+                >
                   Đếm số
                 </button>
                 <div class="alert alert-primary" role="alert">
@@ -109,7 +112,7 @@
               data-bs-parent="#accordionExample"
             >
               <div class="accordion-body">
-                <button class="btn btn-primary" onclick="minNumbers()">
+                <button class="btn btn-primary my-2" onclick="minNumbers()">
                   Tìm số nhỏ nhất
                 </button>
                 <div class="alert alert-primary" role="alert">
@@ -136,10 +139,14 @@
               data-bs-parent="#accordionExample"
             >
               <div class="accordion-body">
-                <button class="btn btn-primary" onclick="minNumberPositive()">
+                <button
+                  class="btn btn-primary my-2"
+                  onclick="minNumberPositive()"
+                >
                   Tìm số dương nhỏ nhất
                 </button>
                 <div class="alert alert-primary" role="alert">
+                  <span id="textMinNumber"> Kết quả là :</span>
                   <span id="minPositiveNumber"></span>
                 </div>
               </div>
@@ -163,7 +170,7 @@
               data-bs-parent="#accordionExample"
             >
               <div class="accordion-body">
-                <button class="btn btn-primary" onclick="evenNumber()">
+                <button class="btn btn-primary my-2" onclick="evenNumber()">
                   Tìm số chẵn cuối cùng
                 </button>
                 <div class="alert alert-primary" role="alert">
@@ -190,8 +197,21 @@
               data-bs-parent="#accordionExample"
             >
               <div class="accordion-body">
-                <button class="btn btn-primary">Đổi chỗ</button>
-                <div class="alert alert-primary" role="alert">Kết quả là :</div>
+                <div class="row py-2">
+                  <div class="col-6">
+                    <input type="number" id="numberChangeOne" />
+                  </div>
+                  <div class="col-6">
+                    <input type="number" id="numberChangeTwo" />
+                  </div>
+                </div>
+                <button class="btn btn-primary my-2" onclick="changePlaces()">
+                  Đổi chỗ
+                </button>
+                <div class="alert alert-primary" role="alert">
+                  <span id="textNumber">Kết quả là :</span>
+                  <span id="Numchange"></span>
+                </div>
               </div>
             </div>
           </div>
@@ -213,8 +233,13 @@
               data-bs-parent="#accordionExample"
             >
               <div class="accordion-body">
-                <button class="btn btn-primary">Sắp xếp tăng dần</button>
-                <div class="alert alert-primary" role="alert">Kết quả là :</div>
+                <button class="btn btn-primary my-2" onclick="bubbleSort()">
+                  Sắp xếp tăng dần
+                </button>
+                <div class="alert alert-primary" role="alert">
+                  Kết quả là :
+                  <span id="sort"></span>
+                </div>
               </div>
             </div>
           </div>
@@ -236,10 +261,12 @@
               data-bs-parent="#accordionExample"
             >
               <div class="accordion-body">
-                <button class="btn btn-primary">
+                <button class="btn btn-primary my-2" onclick="primeNumber()">
                   Tìm số nguyên tố đầu tiên
                 </button>
-                <div class="alert alert-primary" role="alert">Kết quả là :</div>
+                <div class="alert alert-primary" role="alert">
+                  Kết quả là : <span id="firstPrime"></span>
+                </div>
               </div>
             </div>
           </div>
@@ -261,8 +288,36 @@
               data-bs-parent="#accordionExample"
             >
               <div class="accordion-body">
-                <button class="btn btn-primary">Đếm số</button>
-                <div class="alert alert-primary" role="alert">Kết quả là :</div>
+                <div class="row py-2">
+                  <div class="col-6">
+                    <input
+                      type="number"
+                      id="arrayReal"
+                      class="pb-2"
+                      placeholder="Nhập số"
+                    />
+                  </div>
+                  <div class="col-6">
+                    <button class="btn btn-primary" onclick="addNum()">
+                      Thêm số
+                    </button>
+                  </div>
+                </div>
+                <div
+                  class="alert alert-primary"
+                  role="alert"
+                  id="resultArray"
+                ></div>
+                <button class="btn btn-primary my-2" onclick="countInteger()">
+                  Đếm số
+                </button>
+                <div
+                  class="alert alert-primary"
+                  role="alert"
+                  id="countNumberInteger"
+                >
+                  Kết quả là :
+                </div>
               </div>
             </div>
           </div>
@@ -274,7 +329,7 @@
                 data-bs-toggle="collapse"
                 data-bs-target="#collapseTen"
               >
-                10.Tính Tổng
+                10.So sánh số lượng số âm và số dương
               </button>
             </h2>
             <div
@@ -284,8 +339,16 @@
               data-bs-parent="#accordionExample"
             >
               <div class="accordion-body">
-                <button class="btn btn-primary">Tính Tổng</button>
-                <div class="alert alert-primary" role="alert">Kết quả là :</div>
+                <button class="btn btn-primary my-2" onclick="compare()">
+                  So sánh
+                </button>
+                <div
+                  class="alert alert-primary"
+                  role="alert"
+                  id="compareNumber"
+                >
+                  Kết quả là :
+                </div>
               </div>
             </div>
           </div>
