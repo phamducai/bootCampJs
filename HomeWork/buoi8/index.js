@@ -112,7 +112,7 @@ function bubbleSort() {
 // homeWork 8
 function primeNumber() {
   var n = arr.length;
-  for (var i = 0; i <= n; i++) {
+  for (var i = 0; i < n; i++) {
     var isPrime = true;
     for (var k = 2; k <= Math.sqrt(arr[i]); k++) {
       if (arr[i] % k === 0) {
@@ -124,7 +124,6 @@ function primeNumber() {
       break;
     } else {
       document.getElementById("firstPrime").innerHTML = -1;
-      return -1;
     }
   }
 }
