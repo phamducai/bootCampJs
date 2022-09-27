@@ -3,39 +3,41 @@ var staffList = [];
 function createStaff() {
   var value = validation();
   if (!value) return;
-  // 1.lay input
-  var account = document.getElementById("tknv").value;
-  var fullName = document.getElementById("name").value;
-  var email = document.getElementById("email").value;
-  var passWord = document.getElementById("password").value;
-  var date = document.getElementById("datepicker").value;
-  var payMent = document.getElementById("luongCB").value;
-  var position = document.getElementById("chucvu").value;
-  var hour = +document.getElementById("gioLam").value;
-  // 2.kiem tra thong tin input
-  for (var i = 0; i < staffList.length; i++) {
-    if (account === staffList[i].account) {
-      alert("tai khoan khong hop le !!!");
-      return;
+  else {
+    // 1.lay input
+    var account = document.getElementById("tknv").value;
+    var fullName = document.getElementById("name").value;
+    var email = document.getElementById("email").value;
+    var passWord = document.getElementById("password").value;
+    var date = document.getElementById("datepicker").value;
+    var payMent = document.getElementById("luongCB").value;
+    var position = document.getElementById("chucvu").value;
+    var hour = +document.getElementById("gioLam").value;
+    // 2.kiem tra thong tin input
+    for (var i = 0; i < staffList.length; i++) {
+      if (account === staffList[i].account) {
+        alert("tai khoan khong hop le !!!");
+        return;
+      }
     }
+    var newStaff = new Staff(
+      account,
+      fullName,
+      email,
+      passWord,
+      date,
+      payMent,
+      position,
+      hour
+    );
+    // 3.them vao mang
+    staffList.push(newStaff);
+    // 4.rendermanhinh
+    renderStaff(staffList);
+    // 5.luu ds nhan vien vao localStorage
+    saveStaffList();
+    document.getElementById("btnThemNV").setAttribute("data-dismiss", "modal");
   }
-  var newStaff = new Staff(
-    account,
-    fullName,
-    email,
-    passWord,
-    date,
-    payMent,
-    position,
-    hour
-  );
-  // 3.them vao mang
-  staffList.push(newStaff);
-  // 4.rendermanhinh
-  renderStaff(staffList);
-  // 5.luu ds nhan vien vao localStorage
-  saveStaffList();
-  document.getElementById("btnThemNV").setAttribute("data-dismiss", "modal");
 }
 // validateForm
 function validation() {
@@ -96,6 +98,8 @@ function deleteStaff(account) {
   staffList.splice(ID, 1);
   renderStaff(staffList);
   saveStaffList();
+  document.getElementById("btnThemNV").style.display = "inline-block";
+  document.getElementById("btnCapNhat").style.display = "inline-block";
 }
 
 // ======================================
@@ -187,6 +191,9 @@ function searchStaff() {
   renderStaff(renderSearch);
 }
 function buttonAdd() {
+  document.getElementById("btnReset").click();
+  document.getElementById("btnThemNV").style.display = "inline-block";
+  document.getElementById("tknv").disabled = false;
   document.getElementById("btnCapNhat").style.display = "none";
 }
 function buttonClose() {
