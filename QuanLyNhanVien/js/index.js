@@ -191,10 +191,18 @@ function searchStaff() {
   renderStaff(renderSearch);
 }
 function buttonAdd() {
+  document.getElementById("btnCapNhat").style.display = "none";
+  document.getElementById("tbTen").style.display = "none";
+  document.getElementById("tbEmail").style.display = "none";
+  document.getElementById("tbMatKhau").style.display = "none";
+  document.getElementById("tbNgay").style.display = "none";
+  document.getElementById("tbLuongCB").style.display = "none";
+  document.getElementById("tbChucVu").style.display = "none";
+  document.getElementById("tbGiolam").style.display = "none";
+
   document.getElementById("btnReset").click();
   document.getElementById("btnThemNV").style.display = "inline-block";
   document.getElementById("tknv").disabled = false;
-  document.getElementById("btnCapNhat").style.display = "none";
 }
 function buttonClose() {
   document.getElementById("btnThemNV").style.display = "inline-block";
@@ -205,6 +213,13 @@ function buttonClose() {
 }
 // get update
 function getUpdateStaff(staffId) {
+  document.getElementById("tbTen").style.display = "none";
+  document.getElementById("tbEmail").style.display = "none";
+  document.getElementById("tbMatKhau").style.display = "none";
+  document.getElementById("tbNgay").style.display = "none";
+  document.getElementById("tbLuongCB").style.display = "none";
+  document.getElementById("tbChucVu").style.display = "none";
+  document.getElementById("tbGiolam").style.display = "none";
   var index = findbyID(staffId);
   if (index === -1) return alert("ID khong ton tai");
   var staffCurrent = staffList[index];
@@ -218,6 +233,7 @@ function getUpdateStaff(staffId) {
   document.getElementById("gioLam").value = staffCurrent.hour;
   // hien nut luu thay diu,an nut them
   document.getElementById("btnThemNV").style.display = "none";
+  document.getElementById("btnCapNhat").style.display = "inline-block";
 
   // disable input ma sinh vien
   document.getElementById("tknv").disabled = true;
@@ -226,6 +242,14 @@ function getUpdateStaff(staffId) {
 function updateStaff() {
   var staffId = document.getElementById("tknv").value;
   var index = findbyID(staffId);
+  var tempName = staffList[index].fullName;
+  var tempEmail = staffList[index].email;
+  var tempPassword = staffList[index].passWord;
+  var tempDate = staffList[index].date;
+  var tempPayment = staffList[index].payMent;
+  var tempPosion = staffList[index].position;
+  var tempHour = staffList[index].hour;
+
   staffList[index].fullName = document.getElementById("name").value;
   staffList[index].email = document.getElementById("email").value;
   staffList[index].passWord = document.getElementById("password").value;
@@ -233,19 +257,31 @@ function updateStaff() {
   staffList[index].payMent = document.getElementById("luongCB").value;
   staffList[index].position = document.getElementById("chucvu").value;
   staffList[index].hour = document.getElementById("gioLam").value;
-  document.getElementById("btnThemNV").style.display = "inline-block";
 
-  document.getElementById("tknv").disabled = false;
   var value = validation();
-  if (!value) return;
-  // reset form
-  document.getElementById("btnReset").click();
-  // 4.rendermanhinh
+  if (!value) {
+    staffList[index].fullName = tempName;
+    staffList[index].email = tempEmail;
+    staffList[index].passWord = tempPassword;
+    staffList[index].date = tempDate;
+    staffList[index].payMent = tempPayment;
+    staffList[index].position = tempPosion;
+    staffList[index].hour = tempHour;
 
-  renderStaff(staffList);
-  // 5.luu ds nhan vien vao localStorage
-  saveStaffList();
-  document.getElementById("btnCapNhat").setAttribute("data-dismiss", "modal");
+    return;
+  } else {
+    document.getElementById("btnThemNV").style.display = "inline-block";
+
+    document.getElementById("tknv").disabled = false;
+    // reset form
+    document.getElementById("btnReset").click();
+    // 4.rendermanhinh
+
+    renderStaff(staffList);
+    // 5.luu ds nhan vien vao localStorage
+    saveStaffList();
+    document.getElementById("btnCapNhat").setAttribute("data-dismiss", "modal");
+  }
 }
 // validation form
 function required(val, spanId, nameinPut) {
