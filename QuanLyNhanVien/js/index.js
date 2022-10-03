@@ -192,6 +192,8 @@ function searchStaff() {
 }
 function buttonAdd() {
   document.getElementById("btnCapNhat").style.display = "none";
+
+  document.getElementById("tbTKNV").style.display = "none";
   document.getElementById("tbTen").style.display = "none";
   document.getElementById("tbEmail").style.display = "none";
   document.getElementById("tbMatKhau").style.display = "none";

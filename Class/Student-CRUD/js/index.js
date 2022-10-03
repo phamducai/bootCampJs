@@ -20,7 +20,7 @@
  *
  *
  */
-var studentList = [];
+
 function createStudent() {
   var value = validateForm();
   if (!value) return;
@@ -38,12 +38,7 @@ function createStudent() {
   var math = +document.getElementById("txtDiemToan").value;
   var physic = +document.getElementById("txtDiemLy").value;
   var chemistry = +document.getElementById("txtDiemHoa").value;
-  for (var i = 0; i < studentList.length; i++) {
-    if (studentList[i].studentId === studentId) {
-      alert("ma sinh vien khong hop le !!!");
-      return;
-    }
-  }
+
   var newStudent = new Student(
     studentId,
     fullName,
@@ -54,13 +49,22 @@ function createStudent() {
     physic,
     chemistry
   );
-  studentList.push(newStudent);
-  //5 hien thi ra man hinh
 
-  renderStudents();
-  // 6 luu ds sinh vien tai localStorage
-  setStudentList();
   document.getElementById("btnReset").click();
+  // gui request xuong backend kemf theo cai doi tuong sinh vien moi
+  // request header +body(data)
+  axios({
+    url: "https://5bd2959ac8f9e400130cb7e9.mockapi.io/api/students",
+    method: "POST",
+    data: newStudent,
+  })
+    .then(function (res) {
+      console.log(res);
+      getStudentList();
+    })
+    .catch(function (err) {
+      console.log(err);
+    });
 }
 function validateForm() {
   var studentId = document.getElementById("txtMaSV").value;
@@ -76,14 +80,16 @@ function validateForm() {
 }
 
 function deleteStudent(studentId) {
-  var index = findByID(studentId);
-  if (index === -1) {
-    alert("ma sinh vien khong tai");
-    return;
-  }
-  studentList.splice(index, 1);
-  renderStudents();
-  setStudentList();
+  axios({
+    url: `https://5bd2959ac8f9e400130cb7e9.mockapi.io/api/students/${studentId}`,
+    method: "DELETE",
+  })
+    .then(function (res) {
+      getStudentList();
+    })
+    .catch(function (err) {
+      console.log(err);
+    });
 }
 function renderStudents(data) {
   var HTML = "";
@@ -119,14 +125,20 @@ function setStudentList() {
   localStorage.setItem("SL", studentListJSon);
 }
 function getStudentList() {
-  var studentListJSON = localStorage.getItem("SL");
-  console.log(studentListJSON);
-  if (!studentListJSON) return;
-  // cleancode
-  // parse:giai nen;
-  // stringify:nen
-  studentList = mapData(JSON.parse(studentListJSON));
-  renderStudents();
+  var promise = axios({
+    url: "https://5bd2959ac8f9e400130cb7e9.mockapi.io/api/students",
+    method: "GET",
+  });
+  promise
+    .then(function (response) {
+      studentList = mapData(response.data);
+      console.log(studentList);
+      renderStudents();
+    })
+    .catch(function (err) {
+      console.log(err);
+    });
+  // **promise:-pending;-fulfill,-reject
 }
 // window onload
 window.onload = function () {
@@ -172,39 +184,64 @@ function searchStudent() {
 
 // update phan 1: lay thong tin sinh vien show len tren form
 function getUpdateStudent(studentId) {
-  var index = findByID(studentId);
-  if (index === -1) return alert("ID khong ton tai");
-  var student = studentList[index];
-  document.getElementById("txtMaSV").value = student.studentId;
-  document.getElementById("txtTenSV").value = student.fullName;
-  document.getElementById("txtEmail").value = student.email;
-  document.getElementById("txtNgaySinh").value = student.dob;
-  document.getElementById("khSV").value = student.course;
-  document.getElementById("txtDiemToan").value = student.math;
-  document.getElementById("txtDiemLy").value = student.physic;
-  document.getElementById("txtDiemHoa").value = student.chemistry;
-  // hien nut luu thay diu,an nut them
-  document.getElementById("btnCreate").style.display = "none";
-  document.getElementById("btnReset").style.display = "none";
-  document.getElementById("btnUpdate").style.display = "inline-block";
-  // disable input ma sinh vien
-  document.getElementById("txtMaSV").disabled = true;
+  axios({
+    url: `https://5bd2959ac8f9e400130cb7e9.mockapi.io/api/students/${studentId}`,
+    method: "GET",
+  })
+    .then(function (res) {
+      var student = res.data;
+      console.log(res);
+      document.getElementById("txtMaSV").value = student.studentId;
+      document.getElementById("txtTenSV").value = student.fullName;
+      document.getElementById("txtEmail").value = student.email;
+      document.getElementById("txtNgaySinh").value = student.dob;
+      document.getElementById("khSV").value = student.course;
+      document.getElementById("txtDiemToan").value = student.math;
+      document.getElementById("txtDiemLy").value = student.physic;
+      document.getElementById("txtDiemHoa").value = student.chemistry;
+      // hien nut luu thay diu,an nut them
+      document.getElementById("btnCreate").style.display = "none";
+      document.getElementById("btnReset").style.display = "none";
+      document.getElementById("btnUpdate").style.display = "inline-block";
+      // disable input ma sinh vien
+      document.getElementById("txtMaSV").disabled = true;
+    })
+    .catch(function (err) {
+      console.log(err);
+    });
 }
 // update phan 2: cho nguoi dung sua thong tin tren form
 function updateStudent() {
-  var studentId = document.getElementById("txtMaSV").value;
-  var index = findByID(studentId);
-  var student = studentList[index];
-  student.fullName = document.getElementById("txtTenSV").value;
-  student.email = document.getElementById("txtEmail").value;
-  student.dob = document.getElementById("txtNgaySinh").value;
-  student.course = document.getElementById("khSV").value;
-  student.math = +document.getElementById("txtDiemToan").value;
-  student.physic = +document.getElementById("txtDiemLy").value;
-  student.chemistry = +document.getElementById("txtDiemHoa").value;
-  renderStudents();
-  setStudentList();
-
+  studentId = document.getElementById("txtMaSV").value;
+  fullName = document.getElementById("txtTenSV").value;
+  email = document.getElementById("txtEmail").value;
+  dob = document.getElementById("txtNgaySinh").value;
+  course = document.getElementById("khSV").value;
+  math = +document.getElementById("txtDiemToan").value;
+  chemistry = +document.getElementById("txtDiemHoa").value;
+  physic = +document.getElementById("txtDiemLy").value;
+  var newStudent = new Student(
+    studentId,
+    fullName,
+    email,
+    dob,
+    course,
+    math,
+    physic,
+    chemistry
+  );
+  axios({
+    url: `https://5bd2959ac8f9e400130cb7e9.mockapi.io/api/students/${studentId}`,
+    method: "PUT",
+    data: newStudent,
+  })
+    .then(function (res) {
+      console.log(res);
+      getStudentList();
+    })
+    .catch(function (err) {
+      console.log(err);
+    });
   document.getElementById("btnCreate").style.display = "inline-block";
   document.getElementById("btnReset").style.display = "inline-block";
   document.getElementById("btnUpdate").style.display = "none";
@@ -252,3 +289,4 @@ function checkString(val, spanId) {
   document.getElementById(spanId).innerHTML = "nhap sai dinh dang";
   return false;
 }
+//asynchronous: bat dong bo

@@ -18612,7 +18612,6 @@ $.widget( "ui.tooltip", {
 			tooltipData.closing = false;
 		}
 	},
-
 	_tooltip: function( element ) {
 		var tooltip = $( "<div>" ).attr( "role", "tooltip" ),
 			content = $( "<div>" ).appendTo( tooltip ),
@@ -18648,13 +18647,10 @@ $.widget( "ui.tooltip", {
 
 		return element;
 	},
-
 	_destroy: function() {
 		var that = this;
-
 		// Close open tooltips
 		$.each( this.tooltips, function( id, tooltipData ) {
-
 			// Delegate to close method to handle common cleanup
 			var event = $.Event( "blur" ),
 				element = tooltipData.element;
@@ -18678,7 +18674,6 @@ $.widget( "ui.tooltip", {
 		this.liveRegion.remove();
 	}
 } );
-
 // DEPRECATED
 // TODO: Switch return back to widget declaration at top of file when this is removed
 if ( $.uiBackCompat !== false ) {
@@ -18697,10 +18692,5 @@ if ( $.uiBackCompat !== false ) {
 		}
 	} );
 }
-
 var widgetsTooltip = $.ui.tooltip;
-
-
-
-
 }));
