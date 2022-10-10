@@ -1,0 +1,28 @@
+* {
+  overflow: hidden;
+}
+.card:hover .detailProduct {
+  opacity: 1;
+
+  transition: all 1s;
+}
+
+.card {
+  position: relative;
+}
+.detailProduct {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  opacity: 0;
+  color: white;
+}
+.card:hover .card-body {
+  opacity: 0;
+}
+.card:hover img {
+  opacity: 0.1;
+}
+.card:hover {
+  background: linear-gradient(to left, #8942a8, #ba382f);
+}

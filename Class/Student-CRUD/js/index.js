@@ -79,17 +79,17 @@ function validateForm() {
   return isValid;
 }
 
-function deleteStudent(studentId) {
-  axios({
-    url: `https://5bd2959ac8f9e400130cb7e9.mockapi.io/api/students/${studentId}`,
-    method: "DELETE",
-  })
-    .then(function (res) {
-      getStudentList();
-    })
-    .catch(function (err) {
-      console.log(err);
+async function deleteStudent(studentId) {
+  try {
+    await axios({
+      url: `https://5bd2959ac8f9e400130cb7e9.mockapi.io/api/students/${studentId}`,
+      method: "DELETE",
     });
+    console.log(res);
+    getStudentList();
+  } catch (error) {
+    console.log(err);
+  }
 }
 function renderStudents(data) {
   var HTML = "";
@@ -124,6 +124,7 @@ function setStudentList() {
   var studentListJSon = JSON.stringify(studentList);
   localStorage.setItem("SL", studentListJSon);
 }
+
 function getStudentList() {
   var promise = axios({
     url: "https://5bd2959ac8f9e400130cb7e9.mockapi.io/api/students",
@@ -289,4 +290,34 @@ function checkString(val, spanId) {
   document.getElementById(spanId).innerHTML = "nhap sai dinh dang";
   return false;
 }
-//asynchronous: bat dong bo
+//asynchronous: bat dong bonew
+// new Promise(function (resolve, reject) {
+//   setTimeout(function () {
+//     var data = [{ name: "haha" }, { name: "huhu" }];
+//     resolve(data);
+//   }, 4000);
+// });
+// // dungf de kiemtra chay het chua
+// var p3 = Promise.all(p1, p2);
+// // promise chaining
+// axios().then().catch(); //lay user profile
+// // callback hell
+// // promise chaining
+// axios()
+//   .then(function (res) {
+//     var id = res.id;
+//     return axios();
+//   })
+//   .then(function (res) {
+//     var id = res.id;
+//     return axios();
+//   })
+//   .catch(function (err) {
+//     console.log();
+//   });
+// promise la gi
+// promise.all
+// promisschaining
+// async await
+// chay song song dung then catch
+// chay tuan tu
