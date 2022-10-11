@@ -1,11 +1,11 @@
-class Question {
-  constructor() {
-    this.id = id;
-    this.QuestionType = type;
-    this.content = content;
-    this.anwser = anwser;
+class FillInBlank extends Question {
+  constructor(id, type, content, answers) {
+    super(id, type, content, answers);
   }
-  checkExact() {}
-  render() {}
+  render(index) {
+    return `
+    <h3> Cau ${index} ${this.content}</h3>
+    <input type="text">
+    `;
+  }
 }
-// constructor la phuon thuc huong doi tuong

@@ -8,29 +8,18 @@
   </head>
   <body>
     <h1>Đề Thi Trắc Nghiệm</h1>
-    <div id="questionList">
-      <h3>Tiêu đề câu hỏi ?</h3>
-      <div>
-        <input type="radio" name="" id="" />
-        <label for="">Đáp Án 1 </label>
-      </div>
-      <div>
-        <input type="radio" name="" id="" />
-        <label for="">Đáp Án 2</label>
-      </div>
-      <div>
-        <input type="radio" name="" id="" />
-        <label for="">Đáp Án 3</label>
-      </div>
-      <div>
-        <input type="radio" name="" id="" />
-        <label for="">Đáp Án 4</label>
-      </div>
-      <div>
-        <h3>Tiêu đề câu hỏi</h3>
-        <input type="text" name="" id="" />
-      </div>
-      <button>Nộp Bài</button>
-    </div>
+    <div id="questionList"></div>
+    <button id="btnStart">Start</button>
+    <button id="btnSubmit" style="display: none">Submit</button>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.1.2/axios.min.js"
+      integrity="sha512-bHeT+z+n8rh9CKrSrbyfbINxu7gsBmSHlDCb3gUF1BjmjDzKhoKspyB71k0CIRBSjE5IVQiMMVBgCWjF60qsvA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="model/question.js"></script>
+    <script src="model/fillInBlank.js"></script>
+    <script src="model/multiplechoie.js"></script>
+    <script src="js/index.js"></script>
   </body>
 </html>
