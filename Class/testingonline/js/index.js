@@ -10,7 +10,6 @@ phan tich lop doi tuong
 */
 
 let questionList = [];
-
 const startExam = async () => {
   // 1.call api fetch can mang
   // 2.in danh sahc cau hoi ra man hinh
@@ -24,7 +23,9 @@ const startExam = async () => {
     renderQuestion(questionList);
     document.getElementById("btnSubmit").style.display = "inline-block";
     document.getElementById("btnStart").style.display = "none";
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 };
 function renderQuestion(data) {
   var questionHTML = "";
@@ -41,7 +42,7 @@ window.onload = function () {
 
 function mapData(dataFromAPI) {
   const result = [];
-  console.log(dataFromAPI);
+
   dataFromAPI.forEach((item) => {
     const { id, questionType, content, answers } = item;
     if (item.questionType === 1) {
@@ -50,7 +51,7 @@ function mapData(dataFromAPI) {
       result.push(new FillInBlank(id, questionType, content, answers));
     }
   });
-  console.log(result);
+
   return result;
 }
 const submit = () => {

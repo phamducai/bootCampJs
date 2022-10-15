@@ -12,6 +12,7 @@ async function getData() {
       method: "GET",
     });
     productList = mapData(data);
+    console.log(data);
     renderData(data);
   } catch (err) {
     console.log(err);
@@ -45,34 +46,35 @@ function mapData(data) {
 // render toan bo du lieu
 function renderData(data) {
   let html = "";
-  for (let i = 0; i < data.length; i++) {
-    html += ` <div class="col-3 mt-3">
+  for (let item of data) {
+    html += `<div class="col-3 mt-3">
     <div
       class="card"
       style="width: 16rem; border-radius: 2rem; border-color: black"
     >
       <img
-        src='${data[i].img}'
+        src='${item.img}'
         class="card-img-top mt-2"
         alt="..."
         style="width: 100%; border-radius: 2rem; border: none"
       />
       <div class="card-body">
-        <h5 class="card-title text-center">${data[i].name}</h5>
-        <p class="text-center">Giá : ${data[i].price}</p>
+        <h5 class="card-title text-center">${item.name}</h5>
+        <p class="text-center">Giá : ${item.price}</p>
       </div>
       <div class="detailProduct">
         <h4>Thông số sản phẩm</h4>
-        <p> ${data[i].name}</p>
-        <p>Screen : ${data[i].screen}</p>
-        <p>blackcamera : ${data[i].backCamera}</p>
-        <p>front camera : ${data[i].frontCamera}</p>
-        <p>${data[i].desc}</p>
-        <button class="mt-2 btn btn-outline-info ms-5">Buy Now</button>
+        <p> ${item.name}</p>
+        <p>Screen : ${item.screen}</p>
+        <p>blackcamera : ${item.backCamera}</p>
+        <p>front camera : ${item.frontCamera}</p>
+        <p>${item.desc}</p>
+        <button class="mt-2 btn btn-outline-info ms-5">Add Card</button>
       </div>
     </div>
   </div>`;
   }
+  console.log(html);
   document.getElementById("renderhtml").innerHTML = html;
 }
 
@@ -83,10 +85,12 @@ function searchType() {
 
   if (!phoneType) {
     results = productList;
+    console.log(productList);
   } else {
     for (let i = 0; i < productList.length; i++) {
       if (productList[i].type === phoneType) {
         results.push(productList[i]);
+        console.log(results);
       }
     }
   }
